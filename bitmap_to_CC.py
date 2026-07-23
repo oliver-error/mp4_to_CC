@@ -8,9 +8,12 @@ CCcolorsRGB = [
 ]
 file = ""
 
-image = Image.open(r"C:\Users\tyler\Downloads\Screenshot 2026-06-22 151919.bmp")
-image = image.resize((143, 52), Image.Resampling.NEAREST)
-file = str(image.width) + ", " + str(image.height) + " ["
+width, height = 164, 81
+image = Image.open(r"C:\Users\tyler\Downloads\Screenshot 2026-07-22 094002.bmp")
+image = image.convert("RGB")
+image = image.resize((width, height), Image.Resampling.NEAREST)
+file = str(width) + ", " + str(height) + " ["
+
 
 repeatCounter = 0
 lastColorIndex = -1
@@ -28,7 +31,11 @@ for x in range(image.width):
             lastColorIndex = closest_color_index
             repeatCounter = 1
 
-file = file[:-2] + "]"
+if lastColorIndex != -1:
+    file += str(lastColorIndex) + ":" + str(repeatCounter)
+
+file += "]"
+
 output_path = r"C:\Users\tyler\Downloads\data.CCimg"
 
 # Open the file and write the contents
